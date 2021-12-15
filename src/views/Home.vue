@@ -1,6 +1,6 @@
 <template>
   <main v-if="!loading">
-    Show Data
+    <DataTitle :text="title" :dataDate="dataDate"></DataTitle>
   </main>
 
   <main v-else class="flex flex-col align-center justify-center text-center">
@@ -13,11 +13,15 @@
 
 <script>
 
-  import image from "../assets/hourglass.gif"
+  import image from '../assets/hourglass.gif'
+  import DataTitle from '../components/DataTitle.vue';
+  
 
   export default {
     name: 'Home',
-    components: {},
+    components: {
+      DataTitle
+    },
     data() {
       return {
         loading: true,
