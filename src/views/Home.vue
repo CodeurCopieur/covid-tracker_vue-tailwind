@@ -1,6 +1,7 @@
 <template>
   <main v-if="!loading">
     <DataTitle :text="title" :dataDate="dataDate"></DataTitle>
+    <DataBoxes :stats="stats"></DataBoxes>
   </main>
 
   <main v-else class="flex flex-col align-center justify-center text-center">
@@ -15,19 +16,21 @@
 
   import image from '../assets/hourglass.gif'
   import DataTitle from '../components/DataTitle.vue';
+  import DataBoxes from '../components/DataBoxes.vue';
   
 
   export default {
     name: 'Home',
     components: {
-      DataTitle
+      DataTitle,
+      DataBoxes
     },
     data() {
       return {
         loading: true,
         title : 'Global',
         dataDate: '',
-        status:{},
+        stats:{},
         countries: [],
         loadingImage: image
       }
@@ -43,7 +46,7 @@
       const data = await this.fetchCovidData()
 
       this.dataDate = data.Date
-      this.status = data.Global
+      this.stats = data.Global
       this.countries = data.Countries
       this.loading = false
     }
