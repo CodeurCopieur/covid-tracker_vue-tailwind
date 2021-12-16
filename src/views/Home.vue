@@ -2,6 +2,7 @@
   <main v-if="!loading">
     <DataTitle :text="title" :dataDate="dataDate"></DataTitle>
     <DataBoxes :stats="stats"></DataBoxes>
+    <CountrySelect @get-country="getCountryData" :countries="countries"></CountrySelect>
   </main>
 
   <main v-else class="flex flex-col align-center justify-center text-center">
@@ -17,13 +18,15 @@
   import image from '../assets/hourglass.gif'
   import DataTitle from '../components/DataTitle.vue';
   import DataBoxes from '../components/DataBoxes.vue';
+  import CountrySelect from '../components/CountrySelect.vue';
   
 
   export default {
     name: 'Home',
     components: {
       DataTitle,
-      DataBoxes
+      DataBoxes,
+      CountrySelect
     },
     data() {
       return {
@@ -40,6 +43,10 @@
         const res = await fetch('https://api.covid19api.com/summary')
         const data = await res.json()
         return data
+      },
+      getCountryData(country) {
+        this.stats = country;
+        this.title = country.Country;
       }
     },
     async created() {
