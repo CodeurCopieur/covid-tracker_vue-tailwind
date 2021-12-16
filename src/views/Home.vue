@@ -3,6 +3,10 @@
     <DataTitle :text="title" :dataDate="dataDate"></DataTitle>
     <DataBoxes :stats="stats"></DataBoxes>
     <CountrySelect @get-country="getCountryData" :countries="countries"></CountrySelect>
+
+    <button 
+      class="bg-emerald-600 text-white rounded p-3 mt-10 focus:outline-none hover:bg-emerald-700"
+      @click="clearCountryData">Clear Pays</button>
   </main>
 
   <main v-else class="flex flex-col align-center justify-center text-center">
@@ -47,6 +51,13 @@
       getCountryData(country) {
         this.stats = country;
         this.title = country.Country;
+      },
+      async clearCountryData() {
+        this.loading = true
+        const data = await this.fetchCovidData()
+        this.title = 'Global'
+        this.stats = data.Global
+        this.loading = false
       }
     },
     async created() {
