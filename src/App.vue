@@ -1,10 +1,8 @@
 <template>
-  <div>
-    <Header></Header>
-    <div class="container">
-      <router-view/>
-    </div>
-  </div>
+<Header></Header>
+<div class="container mb-10">
+  <router-view/>
+</div>
 </template>
 <script>
 import Header from './components/Header.vue'
